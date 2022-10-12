@@ -6,10 +6,13 @@ import axios from 'axios';
 const News = (props) => {
 
   const [data, setdata] = useState([]);
+
+  
   useEffect(() => {
     axios
       .get(`https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=68d8064edc5342dc8f6220a7f1b4bb73`)
-      .then((res) => setdata(res.data.articles));
+      .then((res) => setdata(res.data.articles))
+      .catch((e)=>console.log(e))
   }, [])
 
   return (
