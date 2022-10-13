@@ -10,7 +10,7 @@ const News = (props) => {
   
   useEffect(() => {
     axios
-      .get(`https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=68d8064edc5342dc8f6220a7f1b4bb73`)
+      .get(`https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${process.env.REACT_APP_API_KEY}`)
       .then((res) => setdata(res.data.articles))
       .catch((e)=>console.log(e));
   }, [])
@@ -20,10 +20,10 @@ const News = (props) => {
       <h1 className='text-center' style={{ margin: '35px 0px', marginTop: '90px' }}>Top {props.category} News Headlines</h1>
       <div className="container">
         <div className="row g-3">
-          {data.map((element) => {
+          {data.map((element,i) => {
             return (
 
-              <div className="col-12 col-md-6 col-lg-4">
+              <div className="col-12 col-md-6 col-lg-4" key={i}>
                 <NewsItem title={element.title ? element.title : ''} description={element.description ? element.description : ''}
                   newsurl={element.url} imageurl={element.urlToImage} key={element.url}/>
               </div>
